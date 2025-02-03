@@ -1,0 +1,13 @@
+#spring.application.name=springsecuritystarter
+logging:
+  level:
+    org.springframework.security: trace
+  pattern:
+    console: "%green(%d{yyyy-MM-dd HH:mm:ss}) | %highlight(%p)  | %yellow(%m) | %cyan(%c{1.}) %n"
+server:
+  port: 8080
+
+oauth2:
+  client:
+    client-id: ${GITHUB_CLIENT_ID}
+    client-secret: ${GITHUB_CLIENT_SECRET}
