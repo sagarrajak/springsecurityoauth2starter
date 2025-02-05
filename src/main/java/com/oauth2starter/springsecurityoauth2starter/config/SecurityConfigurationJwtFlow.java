@@ -5,11 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,7 +22,8 @@ import java.util.Collections;
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
-public class SecurityConfiguration {
+@Profile("!opacque")
+public class SecurityConfigurationJwtFlow {
 //    private final OAuth2ClientProperties githubProperties;
 
     @Bean
@@ -65,6 +66,8 @@ public class SecurityConfiguration {
         http.oauth2ResourceServer( rsc -> {
             // default jwt converter
 //           rsc.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter));
+
+            // Configuration with custom jwt converter
             rsc.jwt(jwt -> jwt.jwtAuthenticationConverter(customJwtAuthenticationConvert));
         });
 //        http.formLogin(Customizer.withDefaults());

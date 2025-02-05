@@ -11,6 +11,6 @@ import java.security.Principal;
 public class UserRoleBasedAccessController {
     @GetMapping("/myUserPage")
     String getUserRoleBasedAccess(Authentication authentication) {
-        return "ROLE_USER " + ((UserDetails)authentication.getPrincipal()).getUsername();
+        return "ROLE_USER ";
     }
 }

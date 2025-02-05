@@ -22,3 +22,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${JWKS_URI}
+        opaque-token:
+          introspection-uri: ${KEYCLOAK_INTROSPECTION_URI}
+          client-id: ${CLIENT_ID}
+          client-secret: ${CLIENT_SECRET}
+
