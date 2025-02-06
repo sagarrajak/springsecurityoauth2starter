@@ -1,0 +1,4 @@
+oauth2:
+  client:
+    client-id: ${GITHUB_CLIENT_ID}
+    client-secret: ${GITHUB_CLIENT_SECRET}
