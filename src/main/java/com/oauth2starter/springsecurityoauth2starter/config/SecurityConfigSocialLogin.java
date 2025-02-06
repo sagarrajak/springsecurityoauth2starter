@@ -114,4 +114,5 @@ public class SecurityConfigSocialLogin {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

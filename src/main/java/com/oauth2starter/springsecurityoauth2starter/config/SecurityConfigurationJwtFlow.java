@@ -35,8 +35,6 @@ public class SecurityConfigurationJwtFlow {
         Converter<Jwt, AbstractAuthenticationToken> customJwtAuthenticationConvert = new CustomJwtAuthenticationConvert(new KeyClockRoleConverter());
 
         http.csrf(AbstractHttpConfigurer::disable)
-//                .sessionManagement(session ->
-//                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(s -> {
                 s.configurationSource(new CorsConfigurationSource() {
                     @Override
@@ -64,54 +62,8 @@ public class SecurityConfigurationJwtFlow {
                 cus.requestMatchers("/notices", "/contacts", "/error", "/auth/**").permitAll();
             });
         http.oauth2ResourceServer( rsc -> {
-            // default jwt converter
-//           rsc.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter));
-
-            // Configuration with custom jwt converter
             rsc.jwt(jwt -> jwt.jwtAuthenticationConverter(customJwtAuthenticationConvert));
         });
-//        http.formLogin(Customizer.withDefaults());
-//        http.httpBasic(Customizer.withDefaults());
-//        http.oauth2Login(Customizer.withDefaults());
         return http.build();
     }
-
-//    @Bean
-//    ClientRegistrationRepository oauth2ClientRegistrationRepository() {
-//        ClientRegistration githubClientRegistration = githubClientRegistration();
-////        ClientRegistration facebookClientRegistration = facebookClientRegistration();
-//        return new InMemoryClientRegistrationRepository(githubClientRegistration);
-//    }
-
-//    private ClientRegistration githubClientRegistration() {
-//        log.info("Loading Github Client Registration id {}", githubProperties.getClientId());
-//        log.info("Loading Github client Registration Secret {}", githubProperties.getClientSecret());
-//        return  CommonOAuth2Provider
-//                .GITHUB.getBuilder("github")
-//                .clientId(githubProperties.getClientId())
-//                .clientSecret(githubProperties.getClientSecret())
-//                .build();
-//    }
-
-
-//    private ClientRegistration facebookClientRegistration() {
-//        return CommonOAuth2Provider.FACEBOOK.getBuilder("facebook")
-//                .clientId("")
-//                .clientSecret("")
-//                .build();
-//    }
-
-//    @Bean
-//    UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("sagar")
-//                .password(passwordEncoder().encode("sagar123"))
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
-
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 }
